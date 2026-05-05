@@ -1,0 +1,67 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+**/node_modules/
+
+# =========================
+# Next.js (UI)
+# =========================
+ui/.next/
+ui/out/
+ui/dist/
+ui/build/
+
+# =========================
+# NestJS (Server)
+# =========================
+server/dist/
+server/build/
+
+# =========================
+# Logs
+# =========================
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.local
+.env.development
+.env.production
+.env.test
+**/.env*
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# IDEs
+# =========================
+.vscode/
+.idea/
+
+# =========================
+# TypeScript build cache
+# =========================
+*.tsbuildinfo
+
+# =========================
+# Testing / coverage
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# Next/Nest caches
+# =========================
+.cache/
+.eslintcache
+
