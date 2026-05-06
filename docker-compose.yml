@@ -1,0 +1,23 @@
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: postgres_db
+    restart: always
+
+    environment:
+      POSTGRES_USER: arxo
+      POSTGRES_PASSWORD: 12234
+      POSTGRES_DB: file_storage
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - /home/arxo/db/postgre:/var/lib/postgresql/data
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app_user -d app_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
