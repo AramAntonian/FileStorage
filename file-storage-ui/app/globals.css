@@ -1,13 +1,20 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --main-color: purple;
+  --secondary-color: white;
+  --default-fontSize: 16px;
+  --small-fontSize: 14px;
+  --medium-fontSize: 24px;
+  --large-fontSize: 32px;
+  --border-radius: 15px
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-
+@theme {
+  --color-main: var(--main-color);
+  --color-secondory: var(--secondary-color);
 }
 
+*{
+  font-family:Arial, Helvetica, sans-serif;
+}

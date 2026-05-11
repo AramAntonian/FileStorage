@@ -18,7 +18,6 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const Rooms_entity_1 = require("../entities/Rooms.entity");
 const Users_entity_1 = require("../entities/Users.entity");
-const uuid_1 = require("uuid");
 let RoomService = class RoomService {
     roomsRepo;
     usersRepo;
@@ -40,6 +39,7 @@ let RoomService = class RoomService {
             });
             return {
                 message: 'Room created',
+                data: newRoom,
             };
         }
         catch {
@@ -66,9 +66,18 @@ let RoomService = class RoomService {
             throw new common_1.HttpException('Invalid room name', common_1.HttpStatus.BAD_REQUEST);
         }
         try {
-            return await this.roomsRepo.save({
-                name: (0, uuid_1.v4)(),
+            const user = await this.usersRepo.findOne({
+                where: { name },
             });
+            if (!user) {
+                throw new common_1.HttpException('User not found', common_1.HttpStatus.NOT_FOUND);
+            }
+            const room = this.roomsRepo.create({
+                name: 'My Storage',
+                users: [user],
+            });
+            await this.roomsRepo.save(room);
+            return room;
         }
         catch {
             throw new common_1.HttpException('Something went wrong', common_1.HttpStatus.INTERNAL_SERVER_ERROR);

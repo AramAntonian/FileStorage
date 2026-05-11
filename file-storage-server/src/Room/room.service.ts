@@ -31,6 +31,7 @@ export class RoomService {
 
       return {
         message: 'Room created',
+        data: newRoom,
       };
     } catch {
       throw new HttpException(
@@ -67,9 +68,22 @@ export class RoomService {
     }
 
     try {
-      return await this.roomsRepo.save({
-        name: uuidv4(),
+      const user = await this.usersRepo.findOne({
+        where: { name },
       });
+
+      if (!user) {
+        throw new HttpException('User not found', HttpStatus.NOT_FOUND);
+      }
+
+      const room = this.roomsRepo.create({
+        name: 'My Storage',
+        users: [user],
+      });
+
+      await this.roomsRepo.save(room);
+
+      return room;
     } catch {
       throw new HttpException(
         'Something went wrong',

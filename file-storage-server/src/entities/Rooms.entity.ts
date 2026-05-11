@@ -1,12 +1,13 @@
 import {
-  Entity,
   Column,
-  PrimaryGeneratedColumn,
-  OneToOne,
-  ManyToMany,
+  Entity,
   JoinTable,
+  ManyToMany,
+  OneToMany,
+  PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Users } from './Users.entity';
+import { Files } from './Files.entity';
 
 @Entity()
 export class Rooms {
@@ -16,10 +17,10 @@ export class Rooms {
   @Column()
   name: string;
 
-  @OneToOne(() => Users, (users) => users.name, { onDelete: 'CASCADE' })
-  user: Users;
-
   @ManyToMany(() => Users, (user) => user.rooms)
   @JoinTable()
   users: Users[];
+
+  @OneToMany(() => Files, (file) => file.room)
+  files: Files[];
 }

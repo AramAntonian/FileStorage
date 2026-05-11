@@ -4,6 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { RoomService } from '../Room/room.service';
+import { Rooms } from '../entities/Rooms.entity';
 
 @Injectable()
 export class AuthService {
@@ -47,12 +48,11 @@ export class AuthService {
         return new HttpException('User already exist', HttpStatus.NOT_FOUND);
       }
       const HashedPassword = await bcrypt.hash(password, 5);
-      const room = await this.roomService.createForUser(name);
       await this.usersRepo.save({
         name,
         password: HashedPassword,
-        room,
       });
+      await this.roomService.createForUser(name);
       console.log(`${name} created successfully`);
       return new HttpException('User created', HttpStatus.OK);
     } catch {

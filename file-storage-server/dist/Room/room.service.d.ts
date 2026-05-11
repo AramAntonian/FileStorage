@@ -8,12 +8,14 @@ export declare class RoomService {
     constructor(roomsRepo: Repository<Rooms>, usersRepo: Repository<Users>);
     create(room: CreateRoomDto): Promise<{
         message: string;
+        data: {
+            name: string;
+            users: Users[];
+        } & Rooms;
     }>;
     getAllRooms(): Promise<Rooms[]>;
     delete(id: number): Promise<{
         message: string;
     }>;
-    createForUser(name: string): Promise<{
-        name: string;
-    } & Rooms>;
+    createForUser(name: string): Promise<Rooms>;
 }

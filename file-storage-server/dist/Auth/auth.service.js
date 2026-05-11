@@ -89,12 +89,11 @@ let AuthService = class AuthService {
                 return new common_1.HttpException('User already exist', common_1.HttpStatus.NOT_FOUND);
             }
             const HashedPassword = await bcrypt.hash(password, 5);
-            const room = await this.roomService.createForUser(name);
             await this.usersRepo.save({
                 name,
                 password: HashedPassword,
-                room,
             });
+            await this.roomService.createForUser(name);
             console.log(`${name} created successfully`);
             return new common_1.HttpException('User created', common_1.HttpStatus.OK);
         }

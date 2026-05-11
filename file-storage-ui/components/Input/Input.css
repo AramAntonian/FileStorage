@@ -1,0 +1,7 @@
+.input-input {
+    outline: none;
+    box-shadow: none;
+    border-bottom: 1px solid black;
+    padding-left: 10px;
+    background: rgb(128 128 128 / 0.19);
+}

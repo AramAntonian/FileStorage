@@ -6,6 +6,10 @@ export declare class RoomController {
     getAllRooms(): Promise<import("../entities/Rooms.entity").Rooms[]>;
     create(room: CreateRoomDto): Promise<{
         message: string;
+        data: {
+            name: string;
+            users: import("../entities/Users.entity").Users[];
+        } & import("../entities/Rooms.entity").Rooms;
     }>;
     delete(id: number): Promise<{
         message: string;

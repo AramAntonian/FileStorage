@@ -1,8 +1,8 @@
-import { Users } from './Users.entity';
+import { Rooms } from './Rooms.entity';
 export declare class Files {
     id: number;
     name: string;
     path: string;
     size: number;
-    user: Users;
+    room: Rooms;
 }

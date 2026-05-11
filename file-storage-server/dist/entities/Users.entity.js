@@ -12,12 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Users = void 0;
 const typeorm_1 = require("typeorm");
 const Rooms_entity_1 = require("./Rooms.entity");
-const Files_entity_1 = require("./Files.entity");
 let Users = class Users {
     name;
     password;
-    room;
-    files;
     rooms;
 };
 exports.Users = Users;
@@ -29,15 +26,6 @@ __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
 ], Users.prototype, "password", void 0);
-__decorate([
-    (0, typeorm_1.OneToOne)(() => Rooms_entity_1.Rooms, (room) => room.id, { onDelete: 'CASCADE' }),
-    (0, typeorm_1.JoinColumn)(),
-    __metadata("design:type", Rooms_entity_1.Rooms)
-], Users.prototype, "room", void 0);
-__decorate([
-    (0, typeorm_1.OneToMany)(() => Files_entity_1.Files, (file) => file.id, { onDelete: 'CASCADE' }),
-    __metadata("design:type", Files_entity_1.Files)
-], Users.prototype, "files", void 0);
 __decorate([
     (0, typeorm_1.ManyToMany)(() => Rooms_entity_1.Rooms, (room) => room.users),
     __metadata("design:type", Array)

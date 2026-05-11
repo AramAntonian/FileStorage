@@ -12,11 +12,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Rooms = void 0;
 const typeorm_1 = require("typeorm");
 const Users_entity_1 = require("./Users.entity");
+const Files_entity_1 = require("./Files.entity");
 let Rooms = class Rooms {
     id;
     name;
-    user;
     users;
+    files;
 };
 exports.Rooms = Rooms;
 __decorate([
@@ -28,14 +29,14 @@ __decorate([
     __metadata("design:type", String)
 ], Rooms.prototype, "name", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => Users_entity_1.Users, (users) => users.name, { onDelete: 'CASCADE' }),
-    __metadata("design:type", Users_entity_1.Users)
-], Rooms.prototype, "user", void 0);
-__decorate([
     (0, typeorm_1.ManyToMany)(() => Users_entity_1.Users, (user) => user.rooms),
     (0, typeorm_1.JoinTable)(),
     __metadata("design:type", Array)
 ], Rooms.prototype, "users", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Files_entity_1.Files, (file) => file.room),
+    __metadata("design:type", Array)
+], Rooms.prototype, "files", void 0);
 exports.Rooms = Rooms = __decorate([
     (0, typeorm_1.Entity)()
 ], Rooms);

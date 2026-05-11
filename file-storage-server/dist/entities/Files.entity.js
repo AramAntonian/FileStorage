@@ -11,13 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Files = void 0;
 const typeorm_1 = require("typeorm");
-const Users_entity_1 = require("./Users.entity");
+const Rooms_entity_1 = require("./Rooms.entity");
 let Files = class Files {
     id;
     name;
     path;
     size;
-    user;
+    room;
 };
 exports.Files = Files;
 __decorate([
@@ -37,9 +37,9 @@ __decorate([
     __metadata("design:type", Number)
 ], Files.prototype, "size", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => Users_entity_1.Users, (user) => user.name),
-    __metadata("design:type", Users_entity_1.Users)
-], Files.prototype, "user", void 0);
+    (0, typeorm_1.ManyToOne)(() => Rooms_entity_1.Rooms, (room) => room.files, { onDelete: 'CASCADE' }),
+    __metadata("design:type", Rooms_entity_1.Rooms)
+], Files.prototype, "room", void 0);
 exports.Files = Files = __decorate([
     (0, typeorm_1.Entity)()
 ], Files);

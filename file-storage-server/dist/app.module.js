@@ -49,6 +49,8 @@ const Rooms_entity_1 = require("./entities/Rooms.entity");
 const Files_entity_1 = require("./entities/Files.entity");
 const auth_module_1 = require("./Auth/auth.module");
 const room_module_1 = require("./Room/room.module");
+const file_module_1 = require("./File/file.module");
+const user_module_1 = require("./User/user.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -70,6 +72,8 @@ exports.AppModule = AppModule = __decorate([
             }),
             auth_module_1.AuthModule,
             room_module_1.RoomModule,
+            file_module_1.FileModule,
+            user_module_1.UserModule,
         ],
     })
 ], AppModule);

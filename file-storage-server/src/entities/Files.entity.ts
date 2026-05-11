@@ -1,5 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Users } from './Users.entity';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne } from 'typeorm';
+import { Rooms } from './Rooms.entity';
 
 @Entity()
 export class Files {
@@ -15,6 +15,6 @@ export class Files {
   @Column()
   size: number;
 
-  @OneToMany(() => Users, (user) => user.name)
-  user: Users;
+  @ManyToOne(() => Rooms, (room) => room.files, { onDelete: 'CASCADE' })
+  room: Rooms;
 }

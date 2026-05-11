@@ -8,6 +8,7 @@ import { Files } from './entities/Files.entity';
 import { AuthModule } from './Auth/auth.module';
 import { RoomModule } from './Room/room.module';
 import { FileModule } from './File/file.module';
+import { UserModule } from './User/user.module';
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { FileModule } from './File/file.module';
     AuthModule,
     RoomModule,
     FileModule,
+    UserModule,
   ],
 })
 export class AppModule {}
