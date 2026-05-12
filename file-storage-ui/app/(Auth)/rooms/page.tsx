@@ -1,6 +1,6 @@
 function RoomRoot() {
     return (
-        <div>choosedddddddddddddddddddddddddddddddddd a storage</div>
+        <div>choose a storage</div>
     )
 }
 

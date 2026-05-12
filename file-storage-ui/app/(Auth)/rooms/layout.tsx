@@ -1,4 +1,4 @@
-import RoomsHeader from "@/pages/Home/Rooms/RoomsHeader";
+import RoomsHeader from "../../../pages/Rooms/RoomsHeader";
 import {cookies} from "next/headers";
 
 interface  RoomLayoutProps {

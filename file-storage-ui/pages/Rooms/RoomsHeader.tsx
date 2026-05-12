@@ -1,7 +1,9 @@
 'use client'
-import { RoomProps } from "@/consts/room";
+
 import Link from "next/link";
 import {useParams} from "next/navigation";
+import {RoomProps} from "@/consts/room";
+
 interface HeaderProps {
     rooms: RoomProps[];
 
@@ -46,11 +48,13 @@ function RoomsHeader({rooms}: HeaderProps) {
                     }
                     )
                 }
-                <div
-                    className='border-2 bg-gray-700 text-white rounded-2xl w-7.5 h-8 text-center cursor-pointer'
-                    >
-                    <Link href={'/addRoom'}>+</Link>
-                </div>
+                <Link href={'/rooms/addRoom'}>
+                    <div
+                     className='border-2 bg-gray-700 text-white rounded-2xl w-7.5 h-8 text-center cursor-pointer'
+                     >
+                            +
+                    </div>
+                </Link>
             </div>
         </div>
         </>

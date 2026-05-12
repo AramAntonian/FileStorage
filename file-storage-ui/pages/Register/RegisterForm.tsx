@@ -47,7 +47,7 @@ function RegisterForm () {
                 <span className='text-[14px]'>Show password</span>
             </label>
             <Space top={10}/>
-            <Button text={'Register'} onClick={handleRegister} size='medium'/>
+            <Button text={'Register'} click={handleRegister} size='medium'/>
         </div>
     )
 }

@@ -42,7 +42,7 @@ function LoginForm () {
                 <span className='text-[14px]'>Show password</span>
             </label>
             <Space top={10}/>
-            <Button text={'Log in'} onClick={handleLogin} size='medium'/>
+            <Button text={'Log in'} click={handleLogin} size='medium'/>
         </div>
     )
 }

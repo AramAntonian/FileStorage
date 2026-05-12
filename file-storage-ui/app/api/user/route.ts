@@ -1,5 +1,7 @@
 export async function GET() {
     const res = await fetch("http://localhost:3001/user");
-    return await res.json()
+    const data =  await res.json()
 
+    console.log(data)
+    return Response.json(data)
 }
