@@ -18,4 +18,5 @@ export declare class RoomService {
         message: string;
     }>;
     createForUser(name: string): Promise<Rooms>;
+    getOne(id: number): Promise<Rooms | null>;
 }

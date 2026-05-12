@@ -33,7 +33,6 @@ let UserService = class UserService {
             where: { name },
             relations: ['rooms'],
         });
-        console.log(user);
         if (user && user.rooms) {
             return user.rooms;
         }
@@ -42,7 +41,7 @@ let UserService = class UserService {
         }
     }
     async getAllUsers() {
-        return this.userRepo.find();
+        return this.userRepo.find({ select: ['name'] });
     }
 };
 exports.UserService = UserService;

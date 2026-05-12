@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Param,
   ParseIntPipe,
   Post,
   Query,
@@ -27,5 +28,10 @@ export class RoomController {
   @Delete('delete')
   async delete(@Query('id', ParseIntPipe) id: number) {
     return this.roomService.delete(id);
+  }
+
+  @Get(':id')
+  async getOne(@Param('id', ParseIntPipe) id: number) {
+    return this.roomService.getOne(id);
   }
 }

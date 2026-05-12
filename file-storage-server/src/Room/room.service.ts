@@ -91,4 +91,11 @@ export class RoomService {
       );
     }
   }
+
+  async getOne(id: number) {
+    return await this.roomsRepo.findOne({
+      where: { id },
+      relations: ['files'],
+    });
+  }
 }

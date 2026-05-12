@@ -83,6 +83,12 @@ let RoomService = class RoomService {
             throw new common_1.HttpException('Something went wrong', common_1.HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    async getOne(id) {
+        return await this.roomsRepo.findOne({
+            where: { id },
+            relations: ['files'],
+        });
+    }
 };
 exports.RoomService = RoomService;
 exports.RoomService = RoomService = __decorate([

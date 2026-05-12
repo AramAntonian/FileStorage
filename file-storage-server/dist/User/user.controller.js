@@ -21,6 +21,7 @@ let UserController = class UserController {
         this.userService = userService;
     }
     getAllUsers() {
+        console.log('a');
         return this.userService.getAllUsers();
     }
     async getUserRooms(name) {

@@ -30,6 +30,9 @@ let RoomController = class RoomController {
     async delete(id) {
         return this.roomService.delete(id);
     }
+    async getOne(id) {
+        return this.roomService.getOne(id);
+    }
 };
 exports.RoomController = RoomController;
 __decorate([
@@ -52,6 +55,13 @@ __decorate([
     __metadata("design:paramtypes", [Number]),
     __metadata("design:returntype", Promise)
 ], RoomController.prototype, "delete", null);
+__decorate([
+    (0, common_1.Get)(':id'),
+    __param(0, (0, common_1.Param)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Number]),
+    __metadata("design:returntype", Promise)
+], RoomController.prototype, "getOne", null);
 exports.RoomController = RoomController = __decorate([
     (0, common_1.Controller)('room'),
     __metadata("design:paramtypes", [room_service_1.RoomService])

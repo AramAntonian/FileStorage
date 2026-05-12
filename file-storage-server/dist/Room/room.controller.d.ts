@@ -14,4 +14,5 @@ export declare class RoomController {
     delete(id: number): Promise<{
         message: string;
     }>;
+    getOne(id: number): Promise<import("../entities/Rooms.entity").Rooms | null>;
 }
