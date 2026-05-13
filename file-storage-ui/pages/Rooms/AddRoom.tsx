@@ -8,11 +8,7 @@ function AddRoom({users} : { users: UserProps[] }) {
     const [roomName, setRoomName] = useState('')
 
     async function addRoom (names: string[]) {
-        if(!roomName) {
-            alert('Please enter a name');
-        } else if (!names.length) {
-            alert('Add at least one user')
-        } else {
+
             const body = {
                 name: roomName,
                 users: names
@@ -26,7 +22,6 @@ function AddRoom({users} : { users: UserProps[] }) {
             })
             const data = await res.json()
             console.log(data)
-        }
     }
     return (
         <div className='flex flex-col items-center justify-center mt-30'>

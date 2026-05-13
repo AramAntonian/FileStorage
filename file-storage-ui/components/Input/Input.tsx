@@ -1,3 +1,4 @@
+'use client'
 import { useMemo, type Dispatch, type SetStateAction } from "react";
 import "./Input.css";
 

@@ -2,6 +2,7 @@
 
 import Modal from "@/components/Modal/Modal";
 import React, { useRef, useState } from "react";
+import {useRouter} from "next/navigation";
 
 interface AddFileInterface {
     user: string,
@@ -10,6 +11,7 @@ interface AddFileInterface {
 
 function AddFile({user, roomId}: AddFileInterface) {
     const [open, setOpen] = useState(false);
+    const route = useRouter()
 
     const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -53,7 +55,7 @@ function AddFile({user, roomId}: AddFileInterface) {
             formData.append("files", file);
         });
 
-
+        console.log(user,roomId)
         const res = await fetch(`/api/files?user=${user}&roomId=${roomId}`, {
             method: "POST",
             body: formData,
@@ -65,6 +67,7 @@ function AddFile({user, roomId}: AddFileInterface) {
 
         setOpen(false);
         setSelectedFiles([])
+        route.refresh()
 
     }
 

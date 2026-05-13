@@ -9,6 +9,7 @@ async function Room ({params}: {params: Promise<{id: string}>}) {
     const cookieStore = await cookies()
     const user = cookieStore.get('user')
     const username = await JSON.parse(user?.value ||'').name
+
     if(isNaN(+id)) {
         redirect('/rooms')
     }
@@ -16,7 +17,7 @@ async function Room ({params}: {params: Promise<{id: string}>}) {
     if(!res.ok){
         return  redirect('/rooms')
     }
-    const room: RoomProps | unknown = await res.json()
+    const room = (await res.json()) as RoomProps
     if(!room) {
         return redirect('/rooms')
     }
@@ -24,11 +25,7 @@ async function Room ({params}: {params: Promise<{id: string}>}) {
     return (
         <div>
 
-            <Files files={
-                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                // @ts-expect-error
-                room.files
-            } />
+            <Files files={room.files!}/>
             <AddFile user={username!} roomId={id}/>
 
         </div>

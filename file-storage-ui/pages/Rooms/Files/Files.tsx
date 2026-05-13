@@ -1,6 +1,5 @@
-'use client'
-
 import {FileProps} from "@/consts/file";
+import FileField from "@/pages/Rooms/Files/FileField";
 
 interface filesProps {
     files: FileProps[]
@@ -9,11 +8,11 @@ interface filesProps {
 function Files({files}: filesProps) {
 
     return(
-        <div>
+        <div className="flex flex-col gap-1 p-5 overflow-auto">
             {
             files.length?
                 files.map(file => (
-                    <div key = {file.id}>{file.name}</div>
+                    <FileField  key = {file.id} file={file}/>
                 ))
 
             :
