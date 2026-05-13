@@ -12,12 +12,13 @@ const file_service_1 = require("./file.service");
 const file_controller_1 = require("./file.controller");
 const typeorm_1 = require("@nestjs/typeorm");
 const Files_entity_1 = require("../entities/Files.entity");
+const Rooms_entity_1 = require("../entities/Rooms.entity");
 let FileModule = class FileModule {
 };
 exports.FileModule = FileModule;
 exports.FileModule = FileModule = __decorate([
     (0, common_1.Module)({
-        imports: [typeorm_1.TypeOrmModule.forFeature([Files_entity_1.Files])],
+        imports: [typeorm_1.TypeOrmModule.forFeature([Files_entity_1.Files, Rooms_entity_1.Rooms])],
         controllers: [file_controller_1.FileController],
         providers: [file_service_1.FileService],
     })

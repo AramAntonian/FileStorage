@@ -9,43 +9,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Files = void 0;
-const typeorm_1 = require("typeorm");
-const Rooms_entity_1 = require("./Rooms.entity");
-let Files = class Files {
-    id;
+exports.CreateFileDto = void 0;
+const class_validator_1 = require("class-validator");
+class CreateFileDto {
     name;
     path;
     size;
     type;
-    room;
-};
-exports.Files = Files;
+    roomId;
+}
+exports.CreateFileDto = CreateFileDto;
 __decorate([
-    (0, typeorm_1.PrimaryGeneratedColumn)(),
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateFileDto.prototype, "name", void 0);
+__decorate([
+    (0, class_validator_1.IsString)(),
+    __metadata("design:type", String)
+], CreateFileDto.prototype, "path", void 0);
+__decorate([
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], Files.prototype, "id", void 0);
+], CreateFileDto.prototype, "size", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsString)(),
     __metadata("design:type", String)
-], Files.prototype, "name", void 0);
+], CreateFileDto.prototype, "type", void 0);
 __decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Files.prototype, "path", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
+    (0, class_validator_1.IsNumber)(),
     __metadata("design:type", Number)
-], Files.prototype, "size", void 0);
-__decorate([
-    (0, typeorm_1.Column)(),
-    __metadata("design:type", String)
-], Files.prototype, "type", void 0);
-__decorate([
-    (0, typeorm_1.ManyToOne)(() => Rooms_entity_1.Rooms, (room) => room.files, { onDelete: 'CASCADE' }),
-    __metadata("design:type", Rooms_entity_1.Rooms)
-], Files.prototype, "room", void 0);
-exports.Files = Files = __decorate([
-    (0, typeorm_1.Entity)()
-], Files);
-//# sourceMappingURL=Files.entity.js.map
+], CreateFileDto.prototype, "roomId", void 0);
+//# sourceMappingURL=CreateFile.js.map

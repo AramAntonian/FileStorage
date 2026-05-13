@@ -4,5 +4,6 @@ export declare class Files {
     name: string;
     path: string;
     size: number;
+    type: string;
     room: Rooms;
 }

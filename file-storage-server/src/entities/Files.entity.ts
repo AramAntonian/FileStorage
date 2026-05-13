@@ -15,6 +15,9 @@ export class Files {
   @Column()
   size: number;
 
+  @Column()
+  type: string;
+
   @ManyToOne(() => Rooms, (room) => room.files, { onDelete: 'CASCADE' })
   room: Rooms;
 }
