@@ -10,7 +10,7 @@ function Files({files}: filesProps) {
     return(
         <div className="flex flex-col gap-1 p-5 overflow-auto">
             {
-            files.length?
+            files && files.length?
                 files.map(file => (
                     <FileField  key = {file.id} file={file}/>
                 ))

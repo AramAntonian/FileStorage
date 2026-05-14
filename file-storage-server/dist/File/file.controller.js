@@ -44,6 +44,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FileController = void 0;
 const common_1 = require("@nestjs/common");
@@ -52,24 +55,29 @@ const multer_1 = require("multer");
 const path_1 = require("path");
 const fs = __importStar(require("fs"));
 const file_service_1 = require("./file.service");
-const UploadFile_1 = require("./Dto/UploadFile");
+const express_1 = __importDefault(require("express"));
 let FileController = class FileController {
     filesService;
     constructor(filesService) {
         this.filesService = filesService;
     }
-    async uploadFiles(files, body) {
+    async uploadFiles(files, roomId) {
         const savedFiles = await Promise.all(files.map((file) => this.filesService.saveFile(file, {
             name: file.originalname,
             path: file.path,
             size: file.size,
             type: file.mimetype,
-            roomId: body.roomId,
+            roomId: +roomId,
         })));
         return {
             message: 'Files uploaded successfully',
             count: savedFiles.length,
         };
+    }
+    async downloadFile(res, id) {
+        const file = await this.filesService.downloadFile(id);
+        res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
+        return res.sendFile(file.path);
     }
 };
 exports.FileController = FileController;
@@ -80,6 +88,7 @@ __decorate([
             destination: (req, file, cb) => {
                 const user = req.query.user;
                 const roomId = req.query.roomId;
+                console.log(roomId, user);
                 const dir = `/home/arxo/arxo/lessons/files/${user}/${roomId}`;
                 fs.mkdirSync(dir, { recursive: true });
                 cb(null, dir);
@@ -91,11 +100,19 @@ __decorate([
         }),
     })),
     __param(0, (0, common_1.UploadedFiles)()),
-    __param(1, (0, common_1.Body)()),
+    __param(1, (0, common_1.Query)('roomId')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Array, UploadFile_1.UploadFilesDto]),
+    __metadata("design:paramtypes", [Array, String]),
     __metadata("design:returntype", Promise)
 ], FileController.prototype, "uploadFiles", null);
+__decorate([
+    (0, common_1.Get)(''),
+    __param(0, (0, common_1.Res)()),
+    __param(1, (0, common_1.Query)('id', common_1.ParseIntPipe)),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, Number]),
+    __metadata("design:returntype", Promise)
+], FileController.prototype, "downloadFile", null);
 exports.FileController = FileController = __decorate([
     (0, common_1.Controller)('file'),
     __metadata("design:paramtypes", [file_service_1.FileService])

@@ -5,6 +5,7 @@ import Input from "@/components/Input/Input";
 import Button from "@/components/Button/Button";
 import Space from "@/components/Space/Space";
 import {useRouter} from "next/navigation";
+import {UserProps} from "@/consts/users";
 
 function LoginForm () {
     const route = useRouter();
@@ -21,15 +22,16 @@ function LoginForm () {
                 },
                 body: JSON.stringify({name, password})
             })
-            const data = await res.json();
-            if(!data.message){
-                await cookieStore.set("user", JSON.stringify(data))
+            const data = (await res.json()) as UserProps;
+
+            if(data.name){
                 route.replace('/')
             } else {
-                alert(data.message)
+                console.log('Something went wrong');
             }
+
         } else {
-            alert('name or password are invalid')
+            console.log('name or password are invalid')
         }
     }
 

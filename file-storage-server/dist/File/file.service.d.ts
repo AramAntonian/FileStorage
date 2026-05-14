@@ -9,4 +9,5 @@ export declare class FileService {
     createUploadPath(user: string, room: string): string;
     generateFilename(file: Express.Multer.File): string;
     saveFile(file: Express.Multer.File, dto: CreateFileDto): Promise<Files>;
+    downloadFile(id: number): Promise<Files>;
 }

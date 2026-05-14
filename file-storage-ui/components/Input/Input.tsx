@@ -1,5 +1,5 @@
 'use client'
-import { useMemo, type Dispatch, type SetStateAction } from "react";
+import React, { useMemo, type Dispatch, type SetStateAction } from "react";
 import "./Input.css";
 
 interface InputParams {
@@ -11,9 +11,7 @@ interface InputParams {
 }
 
 function Input({ type, value, setValue, size, placeholder }: InputParams) {
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        setValue(e.target.value);
-    };
+
     const defineStyle = useMemo(() => {
         const result = { width: "150px", height: "20px" };
 
@@ -38,7 +36,9 @@ function Input({ type, value, setValue, size, placeholder }: InputParams) {
             <input
                 type={type ?? "text"}
                 value={value}
-                onChange={handleChange}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                    setValue(e.target.value)
+                }
                 className="input-input"
                 style={defineStyle}
                 placeholder={placeholder || ""}

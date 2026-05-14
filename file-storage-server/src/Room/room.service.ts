@@ -23,7 +23,7 @@ export class RoomService {
       const users = await this.usersRepo.findBy({
         name: In(room.users),
       });
-
+      console.log(users);
       const newRoom = await this.roomsRepo.save({
         name: room.name,
         users,

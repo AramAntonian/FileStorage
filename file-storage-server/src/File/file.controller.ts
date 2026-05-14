@@ -3,22 +3,17 @@ import {
   Post,
   UploadedFiles,
   UseInterceptors,
-  Body,
+  Query,
+  ParseIntPipe,
+  Get,
+  Res,
 } from '@nestjs/common';
 import { FilesInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import * as fs from 'fs';
 import { FileService } from './file.service';
-import { UploadFilesDto } from './Dto/UploadFile';
-import { Request } from 'express';
-
-interface MulterRequest extends Request {
-  body: {
-    user: string;
-    roomId: string;
-  };
-}
+import express from 'express';
 
 @Controller('file')
 export class FileController {
@@ -28,9 +23,11 @@ export class FileController {
   @UseInterceptors(
     FilesInterceptor('files', 20, {
       storage: diskStorage({
-        destination: (req: Request, file, cb) => {
+        destination: (req: express.Request, file, cb) => {
           const user = req.query.user as string;
           const roomId = req.query.roomId as string;
+
+          console.log(roomId, user);
 
           const dir = `/home/arxo/arxo/lessons/files/${user}/${roomId}`;
 
@@ -49,7 +46,7 @@ export class FileController {
   )
   async uploadFiles(
     @UploadedFiles() files: Express.Multer.File[],
-    @Body() body: UploadFilesDto,
+    @Query('roomId') roomId: string,
   ) {
     const savedFiles = await Promise.all(
       files.map((file) =>
@@ -58,7 +55,7 @@ export class FileController {
           path: file.path,
           size: file.size,
           type: file.mimetype,
-          roomId: body.roomId,
+          roomId: +roomId,
         }),
       ),
     );
@@ -67,5 +64,16 @@ export class FileController {
       message: 'Files uploaded successfully',
       count: savedFiles.length,
     };
+  }
+
+  @Get('')
+  async downloadFile(
+    @Res() res: express.Response,
+    @Query('id', ParseIntPipe) id: number,
+  ) {
+    const file = await this.filesService.downloadFile(id);
+    res.setHeader('Content-Disposition', `attachment; filename="${file.name}"`);
+
+    return res.sendFile(file.path);
   }
 }

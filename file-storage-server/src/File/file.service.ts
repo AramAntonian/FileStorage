@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as fs from 'fs';
@@ -47,5 +47,14 @@ export class FileService {
     });
 
     return this.filesRepository.save(entity);
+  }
+
+  async downloadFile(id: number) {
+    const file = await this.filesRepository.findOne({ where: { id } });
+
+    if (!file) {
+      throw new HttpException('File not found', HttpStatus.NOT_FOUND);
+    }
+    return file;
   }
 }

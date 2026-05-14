@@ -1,26 +1,23 @@
-'use client'
-import {useEffect, useState} from "react";
+"use client"
 import {redirect} from "next/navigation";
 
-function  HomeHeader() {
-    const [username, setUsername] = useState("");
+interface HomeHeaderProps {
+    username: string;
+}
 
-    useEffect(() => {
-        (async function () {
-            const data = await cookieStore.get("user")
-            const user = JSON.parse(typeof data?.value === 'string' ? data?.value : '')
-
-            if(user && typeof  user.name === 'string'){
-                setUsername(user.name)
-            }
-        })()
-    }, []);
+function  HomeHeader({username}: HomeHeaderProps) {
 
     async function logout() {
-        await cookieStore.delete("user")
-        redirect('/login')
-    }
+        const res = await fetch('/api/auth/logout')
+        const data = (await res.json()) as {message: string}
 
+        if(data?.message === 'logged out') {
+            redirect("/login")
+        } else {
+            console.log(data.message)
+        }
+
+    }
 
     return (
         <div className='border-b p-3 flex justify-between'>

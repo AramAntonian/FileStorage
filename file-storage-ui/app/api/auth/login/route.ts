@@ -1,6 +1,8 @@
 import {NextRequest} from "next/server";
+import {cookies} from "next/headers";
 
 export async function POST(req: NextRequest) {
+    const cookieStore = await cookies()
     const body = await req.json()
     console.log(body)
     const res = await fetch('http://192.168.0.82:3001/auth/login',{
@@ -10,5 +12,8 @@ export async function POST(req: NextRequest) {
         },
         body: JSON.stringify(body)
     });
-    return Response.json(await res.json());
+    const data = await res.json()
+
+    cookieStore.set('user', JSON.stringify(data))
+    return Response.json(data);
 }

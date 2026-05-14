@@ -17,7 +17,7 @@ function AddUserList({users, handler} : { users: UserProps[], handler: (names: s
     return (
         <div className='flex flex-col gap-1'>
             {
-                users.length ?
+                users && users.length ?
                     users.map(el => (
                         <div
                             key ={el.name}

@@ -18,27 +18,23 @@ function AddFile({user, roomId}: AddFileInterface) {
     const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
 
     const handleChooseFile = () => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
         inputRef.current?.click();
     };
 
     const handleFileChange = (
         e: React.ChangeEvent<HTMLInputElement>,
     ) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
-        const files: File[] = e.target.files;
+        console.log("change fired");
+        const files = e.target.files;
+        console.log(Array.from(files ?? []));
+        if (!files || files.length === 0) return;
+        const newFiles = Array.from(files);
 
-        if (!files) return;
+        console.log(newFiles);
 
-        setSelectedFiles((prev) => [
-            ...prev,
-            ...Array.from(files),
-        ]);
+        setSelectedFiles((prev) => [...prev, ...newFiles]);
 
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-expect-error
+
         e.target.value = '';
     };
 
@@ -97,7 +93,9 @@ function AddFile({user, roomId}: AddFileInterface) {
                         ref={inputRef}
                         type="file"
                         multiple
-                        className="hidden"
+                        style = {{
+                            display: 'none',
+                        }}
                         onChange={handleFileChange}
                     />
 

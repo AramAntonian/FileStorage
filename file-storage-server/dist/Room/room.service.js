@@ -33,6 +33,7 @@ let RoomService = class RoomService {
             const users = await this.usersRepo.findBy({
                 name: (0, typeorm_2.In)(room.users),
             });
+            console.log(users);
             const newRoom = await this.roomsRepo.save({
                 name: room.name,
                 users,

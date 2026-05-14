@@ -85,6 +85,13 @@ let FileService = class FileService {
         });
         return this.filesRepository.save(entity);
     }
+    async downloadFile(id) {
+        const file = await this.filesRepository.findOne({ where: { id } });
+        if (!file) {
+            throw new common_1.HttpException('File not found', common_1.HttpStatus.NOT_FOUND);
+        }
+        return file;
+    }
 };
 exports.FileService = FileService;
 exports.FileService = FileService = __decorate([
